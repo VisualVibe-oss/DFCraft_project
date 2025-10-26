@@ -4,18 +4,17 @@ import UrlList from "../../components/List/UrlList";
 import SelectUrlState from "../../components/MultiSelect/SelectUrlState";
 import SuggestionButton from "../../components/Button/SuggestionButton";
 import SuggestionDialog from "../../components/Dialog/SuggestionDialog";
-import useBlockUrl from "../../hooks/useBlockUrl";
-import useSaveUrl from "../../hooks/useSaveUrl";
+import useBlockUrl from "../../shared/hooks/useBlockUrl";
+import useSaveUrl from "../../shared/hooks/useSaveUrl";
 
 
 
 
 const DistractionBlockingPage = () => {
 
-    const [urlElements, setUrlElement] = useState([]);
-    const [showDialog, setShowDialog] = useState(false);
+   const [showDialog, setShowDialog] = useState(false);
+   const {urlElements , setUrlElement} =  useBlockUrl()
 
-    useBlockUrl(urlElements)
     useSaveUrl(urlElements)
 
     

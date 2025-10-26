@@ -28,14 +28,15 @@ try {
   fs.ensureDirSync(firefoxDir);
 
   // Define which files we actually need for the extension
-  const neededFiles = [
-    'background.js',
-    'content.js', 
-    'main.js',
-    'main.css',
-    'popup.css',
-    'src'  // This folder contains popup.html and options.html
-  ];
+ const neededFiles = [
+  'background.js',
+  'content.js', 
+  'main.js',
+  'main.css',
+  'popup.css',
+  'src',               // popup.html, options.html
+  'staticPages'        // <-- ajoute ce dossier ici
+];
 
   // Get all files from dist root and filter only needed ones
   const allItems = fs.readdirSync(distDir).filter(item => 
