@@ -1,7 +1,10 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
+import UrlContext from "../context/urlContext";
 
 
-const useSaveUrl =(urlElements)=>{
+const useSaveUrl =()=>{
+
+      const { urlElements, setUrlElement } = useContext(UrlContext)
       useEffect(()=>{
            
             function saveUrl(){
@@ -11,6 +14,8 @@ const useSaveUrl =(urlElements)=>{
             saveUrl()
     
         },[urlElements])
+      
+    return { urlElements, setUrlElement }
 }
 
 

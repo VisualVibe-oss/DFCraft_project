@@ -13,9 +13,7 @@ import useSaveUrl from "../../shared/hooks/useSaveUrl";
 const DistractionBlockingPage = () => {
 
    const [showDialog, setShowDialog] = useState(false);
-   const {urlElements , setUrlElement} =  useBlockUrl()
-
-    useSaveUrl(urlElements)
+    const {urlElements , setUrlElement} = useSaveUrl(urlElements)
 
     
     return (

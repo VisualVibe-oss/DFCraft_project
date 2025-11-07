@@ -1,6 +1,7 @@
 import { useTimer } from "../../shared/hooks/useTimer";
 import { Play, Square, Pause } from "lucide-react";
-
+import Blocker from "../Headless/Blocker";
+import { access } from "fs-extra";
 export default function Timer() {
   const { time, isRunning, setIsRunning, setReset } = useTimer();
 
@@ -10,6 +11,7 @@ export default function Timer() {
   const strokeDasharray = `${
     (percentage / 100) * circumference
   } ${circumference}`;
+
 
   const timerControllers = () => {
     return isRunning ? (
@@ -21,9 +23,15 @@ export default function Timer() {
       <Play color="blue" onClick={() => setIsRunning(true)} />
     );
   };
+  // just for test 
+  const BlockedItem = {
+    sownd : true ,
+    access : true 
+  }
 
   return (
     <div className="flex justify-center bg-blue-200 p-5">
+      <Blocker BlockedItem={BlockedItem} isRunning={isRunning}></Blocker>
       <div className="relative">
         {/* Background circle */}
         <div className="w-52 h-52 rounded-full flex justify-center items-center">

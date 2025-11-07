@@ -1,23 +1,61 @@
 import { useContext, useEffect } from "react"
 import UrlContext from "../context/urlContext";
+import { browserAPI } from "../utils/browserAPI"
+import { access } from "fs-extra";
 
-
-const useBlockUrl = () => {
+const useBlockUrl = (BlockedItem , isRunning ) => {
     const { urlElements, setUrlElement } = useContext(UrlContext)
     useEffect(() => {
         urlElements.forEach((element, index) => {
+            
+         if(isRunning)  { 
 
-            blockSownd(element)
+            if(BlockedItem.sownd){
+                blockSownd(element)
+            }
+    
+            if(BlockedItem.acces){
+                blockAcces(element);
+            }
+        }
 
-            blockAcces(element);
+        
+        return ()=>{
+            
+            
+        }
 
-        });
+        }
+    );
 
-    }, [urlElements]);
+    }, [urlElements , BlockedItem , isRunning]);
 
 
-    return { urlElements, setUrlElement }
+    
 }
+
+
+async function dispatcher(isRunning , BlockedItem){
+    console.log("Blocker unmounted ⚡")
+    if(isRunning){
+        try {
+            const message = {
+                type : "BLOCK" , 
+                sownd : BlockedItem.sownd  ,
+                access : BlockedItem.acces 
+
+            }
+            let response = await browserAPI.runtime.onMessage.sendMessage(message) ;
+            console.log("C'est la reponce " ,response)
+            
+        } catch (error) {
+            console.log("Erreur lors de l'envois du  signal au worker")
+        }
+    }
+}
+
+
+
 
 
 

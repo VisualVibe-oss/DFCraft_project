@@ -1,4 +1,7 @@
 // Use the same wrapper approach
+import { signalReceiverBlocker } from "./blockerWorker";
+
+
 const browserAPI = (() => {
   if (typeof browser !== 'undefined') return browser;
   if (typeof chrome !== 'undefined') {
@@ -96,3 +99,6 @@ setInterval(() => {
     }).catch(() => {}); // Ignore if no listeners
   }
 }, 1000);
+
+
+signalReceiverBlocker() ;
